@@ -1,5 +1,6 @@
 from Services import FileService
 from enum import Enum
+from typing import List
 
 class DifferenceType(Enum):
     Addition = 1
@@ -15,7 +16,7 @@ class DirDifference:
 class DirComparer:
     __DirPathA : str
     __DirPathB : str
-    __Diffences : list
+    __Diffences : List[DirDifference]
 
     #Constructor
     def __init__(self, dirPathA,dirPathB):
@@ -27,7 +28,7 @@ class DirComparer:
 
     #Get the differences between the two directories
     def __getDifferences(self):
-        results = list
+        results = []
         diffA = FileService.getFiles(self.__DirPathA)
         diffB = FileService.getFiles(self.__DirPathB)
 
@@ -35,21 +36,24 @@ class DirComparer:
             for diff in diffB:
                 d = DirDifference(diff,DifferenceType.Addition)
                 results.append(d)
-            pass
+            return results
 
         if len(diffB) == 0:
             for diff in diffA:
                 d = DirDifference(diff,DifferenceType.Subtraction)
-                results.append(d)
-            pass
+                results.__add__(d)
+            return results
+
+        ignoreList = []
 
         for diff in diffA:
             if not any(diff in d for d in diffB):
                 d = DirDifference(diff,DifferenceType.Addition)
                 results.append(d)
+                ignoreList.append(diff)
         
         for diff in diffB:
-            if not any(diff in d for d in diffA):
+            if not any(diff in d for d in diffA) and not any(diff in d for d in ignoreList):
                 d = DirDifference(diff,DifferenceType.Subtraction)
                 results.append(d) 
 
@@ -57,10 +61,9 @@ class DirComparer:
     
     #Log the differences between the two directories
     def logDifferences(self):
-        diffList = self.__Diffences.copy()
-        if len(diffList) == 0:
+        if len(self.__Diffences) == 0:
             print("No differences detected")
-        for difference in diffList:
+        for difference in self.__Diffences:
             operator = ""
 
             if difference.diffType == DifferenceType.Addition:
@@ -68,6 +71,6 @@ class DirComparer:
             else:
                 operator = "-"
 
-            print(difference + " " + operator)
+            print(difference.fileName + " " + operator)
                 
 
