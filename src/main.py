@@ -1,7 +1,9 @@
 from Services import FileService
+import DirectoryComparer
 
 #Get all the files from a given directory
 def main():
-    FileService.copyFile('Weekly Planner.xlsx',"/Users/jbuchan12/Documents/","/Users/jbuchan12/Documents/Source/FileOperations/src/")
-
+    comparer = DirectoryComparer.DirComparer("/Users/jbuchan12/Documents/Source/FileOperations/","/Users/jbuchan12/Downloads/")
+    comparer.logDifferences()
+    
 main()
