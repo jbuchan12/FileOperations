@@ -1,7 +1,8 @@
 from Services import FileService
+import DirectoryComparer
 
 #Get all the files from a given directory
 def main():
-    FileService.createDirectory("/Users/jbuchan12/Documents/Source/FileOperations/src/","example")
+    comparer = DirectoryComparer.DirComparer("","")
     
 main()
