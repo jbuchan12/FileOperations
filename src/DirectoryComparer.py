@@ -2,10 +2,12 @@ from Services import FileService
 from enum import Enum
 from typing import List
 
+#Enum for type of difference between directories
 class DifferenceType(Enum):
     Addition = 1
     Subtraction = 2
 
+#A difference between two directories
 class DirDifference:
     fileName : str
     diffType : DifferenceType
@@ -13,6 +15,7 @@ class DirDifference:
         self.fileName = file
         self.diffType = diffType
 
+#The comparer that does comparisons between two directories
 class DirComparer:
     __DirPathA : str
     __DirPathB : str
