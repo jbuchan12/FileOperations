@@ -23,6 +23,10 @@ def copyFile(fileName : str, fromPath : str, toPath : str, overwriteExistingFile
         raise NameError(toPath + " already contains " + fileName)
     copyfile(fromPath + fileName,toPath + fileName)
 
+#Remove a file from the system
+def delFile(file):
+    os.remove(file)
+
 #Does the given directory contain the given file
 def doesDirContainFile(directory : str, fileName : str) -> bool:
     fromFiles = getFiles(directory)
@@ -32,3 +36,19 @@ def doesDirContainFile(directory : str, fileName : str) -> bool:
         if path == directory + fileName:
             return True
     return False
+
+#Remove all files in a directory smaller than a certain size
+def removeSmallFiles(dir : str, minFileSizeMb = 100):
+    files = getFiles(dir)
+    if len(files) < 1:
+        return
+
+    minByteSize = minFileSizeMb * 1024 * 1024
+
+    for file in files:
+        if os.path.getsize(file) < minByteSize:
+            delFile(file)
+
+    
+
+    
