@@ -5,8 +5,19 @@ from typing import List
 
 #Get all the files in a given directory
 def getFiles(path : str) -> List[str]:
-    dirs = glob.glob(path + "*.*")
+    dirs = glob.glob(path + "*")
     return dirs
+
+#Get only the directories in a given directory
+def getDirs(path : str) -> List[str]:
+    result = []
+    allItems = getFiles(path)
+    
+    for item in allItems:
+        if os.path.isdir(item):
+            result.append(item)
+    
+    return result
 
 #Create directory with the directory name at the given location
 def createDirectory(path : str, directoryName : str):

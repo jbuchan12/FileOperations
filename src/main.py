@@ -3,6 +3,11 @@ import DirectoryComparer
 
 #Get all the files from a given directory
 def main():
-    FileService.removeSmallFiles("/Users/jbuchan12/Documents/Video/Once Upon A Time ... In Hollywood/")
+
+    videoFolderUri = "/Users/jbuchan12/Documents/Video/"
+    dirs = FileService.getDirs(videoFolderUri)
+
+    for d in dirs:
+        FileService.removeSmallFiles(d)
     
 main()
