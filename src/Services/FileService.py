@@ -54,6 +54,34 @@ def removeSmallFiles(dir : str, minFileSizeMb = 100):
         if os.path.getsize(file) < minByteSize:
             delFile(file)
 
+def tidyFileName(filename : str):
+    result = ""
+
+    slashSplit = filename.split("/")
+    file = slashSplit[len(slashSplit) - 2]
+    spaceSplit = file.split(" ")
+
+    index = 0
+    for string in spaceSplit:
+        
+        string = string.replace("(","")
+        string = string.replace(")","")
+
+        if string.isupper():
+            continue
+        if index > 1 and string.isdigit():
+            break
+
+        result += string + " "
+        index = index + 1
+
+    result = result.rstrip()
+    
+    newPath = filename.replace(file + "/","")
+    os.rename(filename,newPath + result)
+
+
+
     
 
     

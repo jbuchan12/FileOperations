@@ -8,6 +8,9 @@ def main():
     dirs = FileService.getDirs(videoFolderUri)
 
     for d in dirs:
-        FileService.removeSmallFiles(d)
+        FileService.tidyFileName(d)
+        # FileService.removeSmallFiles(d)
+
+    #TODO Need to fix the filename to remove brackets etc
     
 main()
