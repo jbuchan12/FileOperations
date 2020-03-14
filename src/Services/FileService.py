@@ -57,6 +57,7 @@ def removeSmallFiles(dir : str, minFileSizeMb = 100):
 def tidyFileName(filename : str):
     result = ""
 
+#todo swap out .for whitespace
     slashSplit = filename.split("/")
     file = slashSplit[len(slashSplit) - 2]
     spaceSplit = file.split(" ")

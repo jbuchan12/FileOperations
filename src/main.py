@@ -1,16 +1,20 @@
 from Services import FileService
+from Services import DataService
 import DirectoryComparer
 
 #Get all the files from a given directory
 def main():
 
-    videoFolderUri = "/Users/jbuchan12/Documents/Video/"
-    dirs = FileService.getDirs(videoFolderUri)
+    DataService.createDatabase()
 
-    for d in dirs:
-        FileService.tidyFileName(d)
-        # FileService.removeSmallFiles(d)
+    
+    # videoFolderUri = "/Users/jbuchan12/Documents/Video/"
+    # dirs = FileService.getDirs(videoFolderUri)
 
-    #TODO Need to fix the filename to remove brackets etc
+    # for d in dirs:
+    #     FileService.tidyFileName(d)
+    #     # FileService.removeSmallFiles(d)
+
+    # #TODO Need to fix the filename to remove brackets etc
     
 main()
