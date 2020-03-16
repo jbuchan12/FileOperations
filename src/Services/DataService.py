@@ -1,10 +1,11 @@
 from Services import Utils
+from Models import DBEntity
 import sqlite3
 
 __dataFolderPath = "/Users/jbuchan12/Documents/Source/FileOperations/Data/Data.db"
 __conn : sqlite3.Connection = sqlite3.connect(__dataFolderPath)
 
-def createTable(obj : any):
+def createTable(obj : DBEntity.DbEntity):
 
     classProperties = Utils.getPublicProperties(obj)
     className = obj.__class__.__name__
