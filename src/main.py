@@ -1,11 +1,13 @@
 from Services import FileService
 from Services import DataService
+from Models import Movie
 import DirectoryComparer
 
 #Get all the files from a given directory
 def main():
 
-    DataService.createDatabase()
+    mib = Movie.Movie("Men In Black")
+    DataService.createTable(mib)
 
     
     # videoFolderUri = "/Users/jbuchan12/Documents/Video/"
