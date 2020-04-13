@@ -1,7 +1,9 @@
 import uuid
-import datetime
-from abc import ABCMeta
+import time
 
-class DbEntity(metaclass=ABCMeta):
+class DbEntity():
     Id : uuid
-    Created : datetime
+    Created : float
+    def __init__(self):
+        self.Id = uuid.uuid1().hex
+        self.Created = time.time

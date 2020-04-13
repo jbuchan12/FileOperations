@@ -1,7 +1,8 @@
 from Models import DBEntity
 
 class Movie(DBEntity.DbEntity):
-    name : str
-    fileSize : int
+    Name : str
+    FileSize : int
     def __init__(self, name):
-        self.name = name
+        self.Name = name
+        super().__init__()

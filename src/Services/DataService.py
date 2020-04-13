@@ -11,11 +11,27 @@ def createTable(obj : DBEntity.DbEntity):
     className = obj.__class__.__name__
     columnsString = ""
 
+    index = 0
     for prop in classProperties:
-        columnsString += f"{prop} text "
+        if(len(classProperties) - 1 == index):
+            columnsString += f"{prop} text "
+            break
+        columnsString += f"{prop} text, "
+        index += 1
 
-    sql = f"CREATE TABLE {className} ( {columnsString} )"
+    sql = f"CREATE TABLE {className} ({columnsString})"
 
     c = __conn.cursor()
     c.execute(sql)
+
+def insertInto(obj : DBEntity.DbEntity):
+
+    tableName = obj.__class__.__name__
+
+    sql = f"INSERT INTO {tableName} (Id,Name) VALUES ('{obj.Id}','{obj.Name}')"
+
+    c = __conn.cursor()
+    c.execute(sql)
+    __conn.commit()
+
     

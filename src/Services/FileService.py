@@ -13,6 +13,22 @@ def getDirs(path : str) -> List[str]:
     dirs = glob.glob(path + "/*/")
     return dirs
 
+#Recursively loop through a directory returning all directories
+def tree(path : str) -> List[str]:
+    result = []
+    dirs = getDirs(path)
+    if len(dirs) == 0:
+        return result
+
+    for dir in dirs:
+        result.append(dir)
+        subdirs = tree(dir)
+        if len(subdirs) == 0:
+            continue
+        result = result + subdirs
+
+    return result
+
 #Create directory with the directory name at the given location
 def createDirectory(path : str, directoryName : str):
     try:
@@ -80,6 +96,10 @@ def tidyFileName(filename : str):
     
     newPath = filename.replace(file + "/","")
     os.rename(filename,newPath + result)
+
+def getLowestDirectory(path : str) -> str:
+    slashSplit = path.split("/")
+    return slashSplit[len(slashSplit) - 2]
 
 
 
